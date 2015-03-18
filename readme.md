@@ -6,7 +6,7 @@ time. All securely on your own server or hosted for you.
 ## Installing
 
 ```sh
-$ composer require "helpspot/userscape"
+$ composer require "userscape/helpspot"
 ```
 
 ## Testing
