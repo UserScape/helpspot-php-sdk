@@ -2,11 +2,12 @@
 
 namespace UserScape\HelpSpot\Object;
 
+use UserScape\HelpSpot\Mixin\CloneWithMixin;
 use UserScape\HelpSpot\Object;
 
 class BookObject implements Object
 {
-    use Mixin\CloneWithMixin;
+    use CloneWithMixin;
     use Mixin\IdMixin;
 
     /**

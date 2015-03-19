@@ -10,8 +10,6 @@ trait IdMixin
     protected $id;
 
     /**
-     * Returns the object ID.
-     *
      * @return int
      */
     public function id()
@@ -20,8 +18,6 @@ trait IdMixin
     }
 
     /**
-     * Returns a new object, with most of the same attributes, and a new ID.
-     *
      * @param int $id
      *
      * @return static
@@ -32,8 +28,6 @@ trait IdMixin
     }
 
     /**
-     * Returns a clone of the object, with a new attribute value.
-     *
      * @param string $key
      * @param mixed  $value
      *
