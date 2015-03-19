@@ -14,7 +14,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "UserScape\\HelpSpot\\Test": "src"
+            "UserScape\\HelpSpot\\Test\\": "tests"
         }
     }
 }
