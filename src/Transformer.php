@@ -2,6 +2,8 @@
 
 namespace UserScape\HelpSpot;
 
+use InvalidArgumentException;
+
 interface Transformer
 {
     /**
@@ -10,6 +12,17 @@ interface Transformer
      * @param array $data
      *
      * @return Object
+     *
+     * @throws InvalidArgumentException
      */
     public function transform(array $data);
+
+    /**
+     * Validates an array of raw data.
+     *
+     * @param array $data
+     *
+     * @throws InvalidArgumentException
+     */
+    public function validate(array $data);
 }

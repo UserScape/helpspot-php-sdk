@@ -6,19 +6,89 @@ use UserScape\HelpSpot\Object;
 
 class BookObject implements Object
 {
+    use Mixin\CloneWithMixin;
+    use Mixin\IdMixin;
+
     /**
-     * {@inheritdoc}
+     * @var string
      */
-    public function id()
+    protected $name;
+
+    /**
+     * @var int
+     */
+    protected $order;
+
+    /**
+     * @var string
+     */
+    protected $description;
+
+    /**
+     * @return string
+     */
+    public function name()
     {
-        // TODO
+        return $this->name;
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $name
+     *
+     * @return static
      */
-    public function withId($id)
+    public function withName($name)
     {
-        // TODO
+        return $this->cloneWith("name", $name);
+    }
+
+    /**
+     * @return int
+     */
+    public function order()
+    {
+        return $this->order;
+    }
+
+    /**
+     * @param int $order
+     *
+     * @return static
+     */
+    public function withOrder($order)
+    {
+        return $this->cloneWith("order", $order);
+    }
+
+    /**
+     * @return string
+     */
+    public function description()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     *
+     * @return static
+     */
+    public function withDescription($description)
+    {
+        return $this->cloneWith("description", $description);
+    }
+
+    /**
+     * @param int    $id
+     * @param string $name
+     * @param int    $order
+     * @param string $description
+     */
+    public function __construct($id, $name, $order, $description)
+    {
+        $this->id = $id;
+        $this->name = $name;
+        $this->order = $order;
+        $this->description = $description;
     }
 }
