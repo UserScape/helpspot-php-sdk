@@ -1,6 +1,6 @@
 <?php
 
-namespace UserScape\HelpSpot\Object\Mixin;
+namespace UserScape\HelpSpot\Mixin;
 
 trait CloneWithMixin
 {

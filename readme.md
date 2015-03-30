@@ -9,6 +9,21 @@ time. All securely on your own server or hosted for you.
 $ composer require "userscape/helpspot"
 ```
 
+## Using
+
+```php
+$transport = new UserScape\HelpSpot\Transport("https://your-domain.helpspot.com");
+
+$transport = $transport
+    ->withEmail("your-email")
+    ->withPassword("your-password");
+
+$response = $transport->request("GET", "private.request.create", [
+    "tNote"     => "A new request!",
+    "xCategory" => ...
+]);
+```
+
 ## Testing
 
 ```sh
