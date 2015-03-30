@@ -191,7 +191,7 @@ class Transport
         $body = null;
 
         try {
-            $body = (string) $client->send($request);
+            $body = (string) $client->send($request)->getBody();
         } catch (RequestException $exception) {
             if ($exception->hasResponse()) {
                 $body = (string) $exception->getResponse()->getBody();

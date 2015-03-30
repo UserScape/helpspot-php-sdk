@@ -24,6 +24,27 @@ $response = $transport->request("GET", "private.request.create", [
 ]);
 ```
 
+```php
+$client = new UserScape\HelpSpot\Client($transport);
+
+$books = $client->request("kb.list");
+
+// Array
+// (
+//     [0] => UserScape\HelpSpot\Object\BookObject Object
+//         (
+//             [name:protected]        => Working With The API
+//             [order:protected]       => 0
+//             [description:protected] => All you need to know about...
+//             [id:protected]          => 1
+//         )
+// )
+
+foreach ($books as $book) {
+    print "book: " . $book->name() . "\n";
+}
+```
+
 ## Testing
 
 ```sh
