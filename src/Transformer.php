@@ -11,7 +11,7 @@ interface Transformer
      *
      * @param array $data
      *
-     * @return Object
+     * @return array|Object
      *
      * @throws InvalidArgumentException
      */
