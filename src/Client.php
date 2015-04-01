@@ -3,6 +3,7 @@
 namespace UserScape\HelpSpot;
 
 use InvalidArgumentException;
+use UserScape\HelpSpot\Transformer\ErrorsTransformer;
 
 class Client
 {
@@ -17,6 +18,21 @@ class Client
      * @var array
      */
     protected $map;
+
+    /**
+     * @param Transport  $transport
+     * @param null|array $map
+     */
+    public function __construct(Transport $transport, array $map = null)
+    {
+        $this->transport = $transport;
+
+        if ($map === null) {
+            $map = (array) require __DIR__ . "/map.php";
+        }
+
+        $this->map = $map;
+    }
 
     /**
      * @return Transport
@@ -55,21 +71,6 @@ class Client
     }
 
     /**
-     * @param Transport  $transport
-     * @param null|array $map
-     */
-    public function __construct(Transport $transport, array $map = null)
-    {
-        $this->transport = $transport;
-
-        if ($map === null) {
-            $map = (array) require __DIR__ . "/map.php";
-        }
-
-        $this->map = $map;
-    }
-
-    /**
      * @param string $endpoint
      * @param array  $parameters
      *
@@ -80,6 +81,10 @@ class Client
         $map = $this->mapForEndpoint($endpoint);
 
         $response = $this->transport->request($map["method"], $endpoint, $parameters);
+
+        if (isset($response["error"])) {
+            return $this->transformErrors($response);
+        }
 
         return $this->transformResponse($map["transformer"], $response);
     }
@@ -106,6 +111,18 @@ class Client
         }
 
         return $map;
+    }
+
+    /**
+     * @param array $response
+     *
+     * @return array|Object
+     */
+    protected function transformErrors(array $response)
+    {
+        $transformer = new ErrorsTransformer();
+
+        return $transformer->transform($response);
     }
 
     /**

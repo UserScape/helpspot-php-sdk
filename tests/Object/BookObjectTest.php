@@ -51,10 +51,10 @@ class BookObjectTest extends Test
     public function itClonesWithNewAttributes()
     {
         $object = new BookObject(
-            (int) $this->sample["xBook"],
-            (string) $this->sample["sBookName"],
-            (int) $this->sample["iOrder"],
-            (string) $this->sample["tDescription"]
+            $this->sample["xBook"],
+            $this->sample["sBookName"],
+            $this->sample["iOrder"],
+            $this->sample["tDescription"]
         );
 
         foreach ($this->modifiers as $modifier => $value) {

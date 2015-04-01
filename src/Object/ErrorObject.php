@@ -8,30 +8,8 @@ use UserScape\HelpSpot\Object;
 class ErrorObject implements Object
 {
     use CloneWithMixin;
+    use Mixin\DescriptionMixin;
     use Mixin\IdMixin;
-
-    /**
-     * @var string
-     */
-    protected $description;
-
-    /**
-     * @return string
-     */
-    public function description()
-    {
-        return $this->description;
-    }
-
-    /**
-     * @param string $description
-     *
-     * @return static
-     */
-    public function withDescription($description)
-    {
-        return $this->cloneWith("description", $description);
-    }
 
     /**
      * @param int    $id
