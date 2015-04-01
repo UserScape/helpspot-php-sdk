@@ -2,19 +2,23 @@
 
 namespace UserScape\HelpSpot\Test\Object;
 
-use UserScape\HelpSpot\Object\ErrorObject;
+use UserScape\HelpSpot\Object\ChapterObject;
 use UserScape\HelpSpot\Test\Test;
 
-class ErrorObjectTest extends Test
+class ChapterObjectTest extends Test
 {
     /**
-     * Sample API error data.
+     * Sample API chapter data.
      *
      * @var array
      */
     protected $sample = [
-        "id"        => 1,
-        "description" => "User authentication failed",
+        "xChapter"     => 2,
+        "sChapterName" => "Getting Started",
+        "name"         => "1. Getting Started",
+        "iOrder"       => 1,
+        "fAppendix"    => false,
+        "pages"        => [],
     ];
 
     /**
@@ -23,8 +27,12 @@ class ErrorObjectTest extends Test
      * @var array
      */
     protected $modifiers = [
-        "withId"          => 2,
-        "withDescription" => "Authentication information not sent",
+        "withId"       => 3,
+        "withName"     => "Getting Finished",
+        "withLabel"    => "1. Getting Finished",
+        "withOrder"    => 2,
+        "withAppendix" => true,
+        "withPages"    => ["foo"],
     ];
 
     /**
@@ -33,8 +41,12 @@ class ErrorObjectTest extends Test
      * @var array
      */
     protected $getters = [
-        "withId"          => "id",
-        "withDescription" => "description",
+        "withId"       => "id",
+        "withName"     => "name",
+        "withLabel"    => "label",
+        "withOrder"    => "order",
+        "withAppendix" => "appendix",
+        "withPages"    => "pages",
     ];
 
     /**
@@ -44,9 +56,13 @@ class ErrorObjectTest extends Test
      */
     public function itClonesWithNewAttributes()
     {
-        $object = new ErrorObject(
-            $this->sample["id"],
-            $this->sample["description"]
+        $object = new ChapterObject(
+            $this->sample["xChapter"],
+            $this->sample["sChapterName"],
+            $this->sample["name"],
+            $this->sample["iOrder"],
+            $this->sample["fAppendix"],
+            $this->sample["pages"]
         );
 
         foreach ($this->modifiers as $modifier => $value) {
