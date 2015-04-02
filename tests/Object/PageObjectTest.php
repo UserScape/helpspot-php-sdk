@@ -2,6 +2,7 @@
 
 namespace UserScape\HelpSpot\Test\Object;
 
+use UserScape\HelpSpot\Object\ChapterObject;
 use UserScape\HelpSpot\Object\PageObject;
 use UserScape\HelpSpot\Test\Test;
 
@@ -54,15 +55,19 @@ class PageObjectTest extends Test
     ];
 
     /**
-     * Create new ChapterObject mocks to test getters/modifiers.
+     * Creates ChapterObject instances (required for creating PageObject instances).
      */
     public function setUp()
     {
         parent::setUp();
 
-        $this->sample["chapter"] = $this->newMock("UserScape\\HelpSpot\\ChapterObject");
+        $this->sample["chapter"] = new ChapterObject(
+            2, "Getting Started", "1. Getting Started", 1, false, []
+        );
 
-        $this->modifiers["chapter"] = $this->newMock("UserScape\\HelpSpot\\ChapterObject");
+        $this->modifiers["withChapter"] = new ChapterObject(
+            3, "Getting Finished", "1. Getting Finished", 2, true, ["foo"]
+        );
     }
 
     /**
@@ -92,7 +97,7 @@ class PageObjectTest extends Test
             $this->assertNotSame($object, $clone);
 
             $this->assertEquals($value, $clone->$getter());
-            $this->assertNotEquals($object->$getter(), $clone->$getter(), $getter);
+            $this->assertNotEquals($object->$getter(), $clone->$getter());
         }
     }
 }
