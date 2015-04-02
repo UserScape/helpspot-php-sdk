@@ -8,6 +8,7 @@ use UserScape\HelpSpot\Transformer\ErrorsTransformer;
 class Client
 {
     use Mixin\CloneWithMixin;
+    use Mixin\CreateMixin;
 
     /**
      * @var Transport
@@ -120,7 +121,7 @@ class Client
      */
     protected function transformErrors(array $response)
     {
-        $transformer = new ErrorsTransformer();
+        $transformer = ErrorsTransformer::create();
 
         return $transformer->transform($response);
     }
@@ -136,7 +137,7 @@ class Client
         /**
          * @var Transformer $transformer
          */
-        $transformer = new $transformer();
+        $transformer = $transformer::create();
 
         return $transformer->transform($response);
     }

@@ -3,11 +3,14 @@
 namespace UserScape\HelpSpot\Transformer;
 
 use InvalidArgumentException;
+use UserScape\HelpSpot\Mixin\CreateMixin;
 use UserScape\HelpSpot\Object\ErrorObject;
 use UserScape\HelpSpot\Transformer;
 
 class ErrorTransformer implements Transformer
 {
+    use CreateMixin;
+
     /**
      * {@inheritdoc}
      */
@@ -15,10 +18,9 @@ class ErrorTransformer implements Transformer
     {
         $this->validate($data);
 
-        return new ErrorObject(
-            (int) $data["id"],
-            (string) $data["description"]
-        );
+        return ErrorObject::create()
+            ->withId((int) $data["id"])
+            ->withDescription((string) $data["description"]);
     }
 
     /**

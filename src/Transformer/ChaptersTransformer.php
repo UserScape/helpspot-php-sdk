@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use UserScape\HelpSpot\Mixin\CreateMixin;
 use UserScape\HelpSpot\Transformer;
 
-class ErrorsTransformer implements Transformer
+class ChaptersTransformer implements Transformer
 {
     use CreateMixin;
 
@@ -17,13 +17,13 @@ class ErrorsTransformer implements Transformer
     {
         $this->validate($data);
 
-        $errors = [];
+        $books = [];
 
-        foreach ((array) $data["error"] as $error) {
-            $errors[] = ErrorTransformer::create()->transform($error);
+        foreach ((array) $data["chapter"] as $book) {
+            $books[] = ChapterTransformer::create()->transform($book);
         }
 
-        return $errors;
+        return $books;
     }
 
     /**
@@ -31,8 +31,8 @@ class ErrorsTransformer implements Transformer
      */
     public function validate(array $data)
     {
-        if (!isset($data["error"])) {
-            throw new InvalidArgumentException("Errors missing");
+        if (!isset($data["chapter"])) {
+            throw new InvalidArgumentException("Chapters missing");
         }
     }
 }
