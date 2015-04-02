@@ -3,10 +3,13 @@
 namespace UserScape\HelpSpot\Transformer;
 
 use InvalidArgumentException;
+use UserScape\HelpSpot\Mixin\CreateMixin;
 use UserScape\HelpSpot\Transformer;
 
 class BooksTransformer implements Transformer
 {
+    use CreateMixin;
+
     /**
      * {@inheritdoc}
      */
@@ -16,10 +19,8 @@ class BooksTransformer implements Transformer
 
         $books = [];
 
-        $transformer = new BookTransformer();
-
-        foreach ($data["book"] as $book) {
-            $books[] = $transformer->transform($book);
+        foreach ((array) $data["book"] as $book) {
+            $books[] = BookTransformer::create()->transform($book);
         }
 
         return $books;
@@ -30,7 +31,7 @@ class BooksTransformer implements Transformer
      */
     public function validate(array $data)
     {
-        if (!isset($data["book"]) or !is_array($data["book"])) {
+        if (!isset($data["book"])) {
             throw new InvalidArgumentException("Books missing");
         }
     }

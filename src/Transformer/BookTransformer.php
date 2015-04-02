@@ -3,11 +3,14 @@
 namespace UserScape\HelpSpot\Transformer;
 
 use InvalidArgumentException;
+use UserScape\HelpSpot\Mixin\CreateMixin;
 use UserScape\HelpSpot\Object\BookObject;
 use UserScape\HelpSpot\Transformer;
 
 class BookTransformer implements Transformer
 {
+    use CreateMixin;
+
     /**
      * {@inheritdoc}
      */
@@ -15,12 +18,11 @@ class BookTransformer implements Transformer
     {
         $this->validate($data);
 
-        return new BookObject(
-            (int) $data["xBook"],
-            (string) $data["sBookName"],
-            (int) $data["iOrder"],
-            (string) $data["tDescription"]
-        );
+        return BookObject::create()
+            ->withId((int) $data["xBook"])
+            ->withName((string) $data["sBookName"])
+            ->withOrder((int) $data["iOrder"])
+            ->withDescription((string) $data["tDescription"]);
     }
 
     /**

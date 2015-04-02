@@ -9,6 +9,7 @@ use GuzzleHttp\Message\RequestInterface;
 class Transport
 {
     use Mixin\CloneWithMixin;
+    use Mixin\CreateMixin;
 
     /**
      * @var string
